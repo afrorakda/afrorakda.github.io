@@ -3,159 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="apple-touch-icon" href="image_hub.png">
-    <link rel="icon" href="image_hub.png">
-    <title>Fridge Combo - 100 Minimalist Tools</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>afrorakda Hub</title>
+    
+    <link rel="icon" href="image_1.png">
+    <link rel="apple-touch-icon" href="image_1.png">
+
     <style>
-        :root {
-            --bg: #fff;
-            --main: #333;
-            --accent: #eee;
-            --card-bg: #fafafa;
-            --radius: 15px;
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #fff; margin: 0; color: #111; -webkit-font-smoothing: antialiased; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 420px; padding: 30px 15px; box-sizing: border-box; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        header { text-align: left; margin-bottom: 30px; padding-left: 5px; }
+        .title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+        h1 { font-size: 1.6rem; font-weight: 800; letter-spacing: -1px; margin: 0; }
+        .progress-badge { 
+            background: #333; color: #fff; padding: 2px 10px; 
+            border-radius: 15px; font-size: 0.7rem; font-weight: 800; 
+            letter-spacing: 0.5px; 
         }
+        .subtitle { font-size: 0.85rem; color: #666; font-weight: 500; }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--main);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .tool-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; transition: 0.2s; }
+        .tool-link:active { transform: scale(0.95); opacity: 0.8; }
+        
+        .icon-box { 
+            width: 85%; margin: 0 auto; aspect-ratio: 1/1; 
+            background: #fff; border: 1px solid #eee; border-radius: 12px; 
+            overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.03); 
+            display: flex; align-items: center; justify-content: center; 
         }
+        .icon-box img { width: 100%; height: 100%; object-fit: cover; }
+        .tool-name { margin-top: 8px; font-size: 0.7rem; font-weight: 700; color: #333; text-align: center; line-height: 1.2; }
 
-        .container {
-            width: 100%;
-            max-width: 400px;
-            padding: 20px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        header { text-align: left; padding: 0 10px; }
-        h1 { font-size: 32px; margin: 0; font-weight: 900; letter-spacing: -1.5px; }
-        .description { font-size: 14px; opacity: 0.6; margin-top: 8px; line-height: 1.4; }
-
-        .tool-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .tool-card {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background-color: var(--card-bg);
-            border: 2px solid var(--accent);
-            border-radius: var(--radius);
-            text-decoration: none;
-            color: var(--main);
-            transition: transform 0.1s, border-color 0.1s;
-        }
-        .tool-card:active { transform: scale(0.98); border-color: var(--main); }
-
-        .tool-icon {
-            width: 50px;
-            height: 50px;
-            background: #fff;
-            border-radius: 12px;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 1px solid var(--accent);
-        }
-        .tool-icon img { width: 100%; height: 100%; object-fit: cover; }
-
-        .tool-info h3 { margin: 0; font-size: 16px; font-weight: 800; }
-        .tool-info p { margin: 4px 0 0; font-size: 12px; opacity: 0.5; }
-
-        .badge {
-            margin-left: auto;
-            font-size: 10px;
-            font-weight: 800;
-            opacity: 0.3;
-        }
-
-        .support-area {
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            border-top: 1px solid var(--accent);
-            padding-top: 25px;
-        }
-
-        .foot-btn {
-            width: 100%;
-            padding: 15px;
-            background-color: var(--main);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius);
-            font-size: 14px;
-            font-weight: bold;
-            text-decoration: none;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        footer {
-            margin-top: auto;
-            padding: 40px 0 20px;
-            text-align: center;
-            font-size: 11px;
-            line-height: 1.8;
-            opacity: 0.4;
-        }
+        footer { margin-top: auto; padding: 40px 0 20px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #f0f0f0; }
+        .kofi-btn { display: inline-block; background: #333; color: #fff; padding: 10px 20px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-bottom: 20px; font-size: 13px; }
+        .footer-line { line-height: 1.6; color: #aaa; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>Fridge Combo</h1>
-        <div class="description">100 Minimalist Web Tools.<br>1 Tool / 1 Action / 0 Tracking.</div>
+        <div class="title-row">
+            <h1>afrorakda Hub</h1>
+            <span class="progress-badge">42 / 100</span>
+        </div>
+        <p class="subtitle">Building 100 minimalist tools for your daily life.</p>
     </header>
 
-    <div class="tool-list">
-        <a href="invisible-char-remover.html" class="tool-card">
-            <div class="tool-icon"><img src="image_42.png" alt="Invisible Eraser"></div>
-            <div class="tool-info">
-                <h3>Invisible Eraser</h3>
-                <p>Remove hidden "dust" from your text.</p>
-            </div>
-            <div class="badge">#42</div>
+    <div class="grid">
+        <a href="https://afrorakda.github.io/Fridge-Combo/" class="tool-link">
+            <div class="icon-box"><img src="image_1.png" alt="Fridge Combo"></div>
+            <span class="tool-name">Fridge Combo</span>
         </a>
-
-        <a href="mark-it.html" class="tool-card">
-            <div class="tool-icon"><img src="image_41.png" alt="Mark It"></div>
-            <div class="tool-info">
-                <h3>Mark It</h3>
-                <p>Text highlighting with markers.</p>
-            </div>
-            <div class="badge">#41</div>
+        <a href="https://afrorakda.github.io/smart-text-cleaner/" class="tool-link">
+            <div class="icon-box"><img src="image_2.png" alt="Text Cleaner"></div>
+            <span class="tool-name">Text Cleaner</span>
         </a>
-
-        </div>
-
-    <div class="support-area">
-        <a href="https://ko-fi.com/afrorakda" target="_blank" class="foot-btn">☕️buy me a coffee</a>
+        <a href="https://afrorakda.github.io/metric-flip/" class="tool-link">
+            <div class="icon-box"><img src="image_3.png" alt="Metric Flip"></div>
+            <span class="tool-name">Metric Flip</span>
+        </a>
+        <a href="https://afrorakda.github.io/pure-link/" class="tool-link">
+            <div class="icon-box"><img src="image_4.png" alt="Pure Link"></div>
+            <span class="tool-name">Pure Link</span>
+        </a>
+        <a href="https://afrorakda.github.io/letter-flip/" class="tool-link">
+            <div class="icon-box"><img src="image_5.png" alt="Letter Flip"></div>
+            <span class="tool-name">Letter Flip</span>
+        </a>
+        <a href="https://afrorakda.github.io/quick-qr/" class="tool-link">
+            <div class="icon-box"><img src="image_6.png" alt="Quick QR"></div>
+            <span class="tool-name">Quick QR</span>
+        </a>
+        <a href="https://afrorakda.github.io/simple-counter/" class="tool-link">
+            <div class="icon-box"><img src="image_7.png" alt="Simple Counter"></div>
+            <span class="tool-name">Simple Counter</span>
+        </a>
+        <a href="https://afrorakda.github.io/unit-price-calc/" class="tool-link">
+            <div class="icon-box"><img src="image_8.png" alt="Unit Price"></div>
+            <span class="tool-name">Unit Price</span>
+        </a>
+        <a href="https://afrorakda.github.io/eye-opener/" class="tool-link">
+            <div class="icon-box"><img src="image_9.png" alt="Eye Opener"></div>
+            <span class="tool-name">Eye Opener</span>
+        </a>
+        <a href="https://afrorakda.github.io/true-cost/" class="tool-link">
+            <div class="icon-box"><img src="image_10.png" alt="True Cost"></div>
+            <span class="tool-name">True Cost</span>
+        </a>
+        <a href="https://afrorakda.github.io/simple-memo/" class="tool-link">
+            <div class="icon-box"><img src="image_11.png" alt="Simple Memo"></div>
+            <span class="tool-name">Simple Memo</span>
+        </a>
+        <a href="https://afrorakda.github.io/next-dose/" class="tool-link">
+            <div class="icon-box"><img src="image_12.png" alt="Next Dose"></div>
+            <span class="tool-name">Next Dose</span>
+        </a>
+        <a href="https://afrorakda.github.io/tag-cleaner/" class="tool-link">
+            <div class="icon-box"><img src="image_13.png" alt="Tag Cleaner"></div>
+            <span class="tool-name">Tag Cleaner</span>
+        </a>
+        <a href="https://afrorakda.github.io/my-menu-roulette/" class="tool-link">
+            <div class="icon-box"><img src="image_14.png" alt="My Menu Roulette"></div>
+            <span class="tool-name">My Menu Roulette</span>
+        </a>
+        <a href="https://afrorakda.github.io/lorem-ipsum/" class="tool-link">
+            <div class="icon-box"><img src="image_15.png" alt="Lorem Ipsum"></div>
+            <span class="tool-name">Lorem Ipsum</span>
+        </a>
+        <a href="https://afrorakda.github.io/hidden-space-finder/" class="tool-link">
+            <div class="icon-box"><img src="image_16.png" alt="Hidden Space Finder"></div>
+            <span class="tool-name">Hidden Space Finder</span>
+        </a>
+        <a href="https://afrorakda.github.io/headline-master/" class="tool-link">
+            <div class="icon-box"><img src="image_17.png" alt="Headline Master"></div>
+            <span class="tool-name">Headline Master</span>
+        </a>
+        <a href="https://afrorakda.github.io/slug-maker/" class="tool-link">
+            <div class="icon-box"><img src="image_18.png" alt="Slug Maker"></div>
+            <span class="tool-name">Slug Maker</span>
+        </a>
+        <a href="https://afrorakda.github.io/insta-liner/" class="tool-link">
+            <div class="icon-box"><img src="image_19.png" alt="Insta Liner"></div>
+            <span class="tool-name">Insta Liner</span>
+        </a>
+        <a href="https://afrorakda.github.io/line-decorator/" class="tool-link">
+            <div class="icon-box"><img src="image_20.png" alt="Line Decorator"></div>
+            <span class="tool-name">Line Decorator</span>
+        </a>
+        <a href="https://afrorakda.github.io/parallel-timer/" class="tool-link">
+            <div class="icon-box"><img src="image_21.png" alt="Parallel Timer"></div>
+            <span class="tool-name">Parallel Timer</span>
+        </a>
+        <a href="https://afrorakda.github.io/color-snap/" class="tool-link">
+            <div class="icon-box"><img src="image_22.png" alt="Color Snap"></div>
+            <span class="tool-name">Color Snap</span>
+        </a>
+        <a href="https://afrorakda.github.io/font-picker/" class="tool-link">
+            <div class="icon-box"><img src="image_23.png" alt="Font Picker"></div>
+            <span class="tool-name">Font Picker</span>
+        </a>
+        <a href="https://afrorakda.github.io/currency-duo/" class="tool-link">
+            <div class="icon-box"><img src="image_24.png" alt="Currency Duo"></div>
+            <span class="tool-name">Currency Duo</span>
+        </a>
+        <a href="https://afrorakda.github.io/title-namer/" class="tool-link">
+            <div class="icon-box"><img src="image_25.png" alt="Title Namer"></div>
+            <span class="tool-name">Title Namer</span>
+        </a>
+        <a href="https://afrorakda.github.io/json-clean/" class="tool-link">
+            <div class="icon-box"><img src="image_26.png" alt="Json-clean"></div>
+            <span class="tool-name">Json-clean</span>
+        </a>
+        <a href="https://afrorakda.github.io/link-cleaner/" class="tool-link">
+            <div class="icon-box"><img src="image_27.png" alt="Link Cleaner"></div>
+            <span class="tool-name">Link Cleaner</span>
+        </a>
+        <a href="https://afrorakda.github.io/status-code/" class="tool-link">
+            <div class="icon-box"><img src="image_28.png" alt="Status Code"></div>
+            <span class="tool-name">Status Code</span>
+        </a>
+        <a href="https://afrorakda.github.io/json-key-picker/" class="tool-link">
+            <div class="icon-box"><img src="image_29.png" alt="JSON Key Picker"></div>
+            <span class="tool-name">JSON Key Picker</span>
+        </a>
+        <a href="https://afrorakda.github.io/unix-timestamp-converter/" class="tool-link">
+            <div class="icon-box"><img src="image_30.png" alt="Unix Timestamp Converter"></div>
+            <span class="tool-name">Unix Timestamp Converter</span>
+        </a>
+        <a href="https://afrorakda.github.io/contrast-checker/" class="tool-link">
+            <div class="icon-box"><img src="image_31.png" alt="Contrast Checker"></div>
+            <span class="tool-name">Contrast Checker</span>
+        </a>
+        <a href="https://afrorakda.github.io/json-to-csv/" class="tool-link">
+            <div class="icon-box"><img src="image_32.png" alt="JSON to CSV"></div>
+            <span class="tool-name">JSON to CSV</span>
+        </a>
+        <a href="https://afrorakda.github.io/quick-clip/" class="tool-link">
+            <div class="icon-box"><img src="image_33.png" alt="Quick Clip"></div>
+            <span class="tool-name">Quick Clip</span>
+        </a>
+        <a href="https://afrorakda.github.io/quick-image-resizer/" class="tool-link">
+            <div class="icon-box"><img src="image_34.png" alt="Quick Image Resizer"></div>
+            <span class="tool-name">Quick Image Resizer</span>
+        </a>
+        <a href="https://afrorakda.github.io/8-rounds-tabata/" class="tool-link">
+            <div class="icon-box"><img src="image_35.png" alt="8 Rounds Tabata"></div>
+            <span class="tool-name">8 Rounds Tabata</span>
+        </a>
+        <a href="https://afrorakda.github.io/recipe-multiplier/" class="tool-link">
+            <div class="icon-box"><img src="image_36.png" alt="Recipe Multiplier"></div>
+            <span class="tool-name">Recipe Multiplier</span>
+        </a>
+        <a href="https://afrorakda.github.io/color-tap-copy/" class="tool-link">
+            <div class="icon-box"><img src="image_37.png" alt="Color Tap & Copy"></div>
+            <span class="tool-name">Color Tap & Copy</span>
+        </a>
+        <a href="https://afrorakda.github.io/simple-words/" class="tool-link">
+            <div class="icon-box"><img src="image_38.png" alt="Simple Words"></div>
+            <span class="tool-name">Simple Words</span>
+        </a>
+        <a href="https://afrorakda.github.io/focus-reader/" class="tool-link">
+            <div class="icon-box"><img src="image_39.png" alt="Focus Reader"></div>
+            <span class="tool-name">Focus Reader</span>
+        </a>
+        <a href="https://afrorakda.github.io/twin-time/" class="tool-link">
+            <div class="icon-box"><img src="image_40.png" alt="Twin Time"></div>
+            <span class="tool-name">Twin Time</span>
+        </a>
+        <a href="https://afrorakda.github.io/mark-it/" class="tool-link">
+            <div class="icon-box"><img src="image_41.png" alt="Mark It"></div>
+            <span class="tool-name">Mark It</span>
+        </a>
+        <a href="https://afrorakda.github.io/invisible-char-remover/" class="tool-link">
+            <div class="icon-box"><img src="image_42.png" alt="Invisible Eraser"></div>
+            <span class="tool-name">Invisible Eraser</span>
+        </a>
     </div>
-</div>
 
-<footer>
-    No login / No tracking / No ads / Browser only<br>
-    Privacy Policy / afrorakda © 2026
-</footer>
+    <footer>
+        <a href="https://ko-fi.com/afrorakda" target="_blank" rel="noopener" class="kofi-btn">☕ Support me on Ko-fi</a>
+        <div class="footer-line">
+            <div>No login / No tracking / No ads</div>
+            <div>Privacy Policy</div>
+            <div style="margin-top: 8px; font-weight: bold; color: #333;">afrorakda © 2026</div>
+        </div>
+    </footer>
+</div>
 
 </body>
 </html>
