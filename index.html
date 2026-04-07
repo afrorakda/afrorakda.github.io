@@ -67,12 +67,45 @@
 
         #no-results { display: none; text-align: center; padding: 40px 0; color: #ccc; font-weight: 700; font-size: 0.9rem; }
 
-        footer { margin-top: auto; padding: 40px 0 20px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #f0f0f0; }
-        .kofi-btn { display: inline-block; background: var(--main); color: #fff; padding: 10px 20px; border-radius: var(--radius); text-decoration: none; font-weight: bold; margin-bottom: 20px; font-size: 13px; }
-        .footer-line { line-height: 1.6; color: #aaa; }
+        footer { 
+            margin-top: auto; 
+            padding: 40px 0 30px; 
+            text-align: center; 
+            border-top: 2px solid #f5f5f5; 
+        }
+        .kofi-btn { 
+            display: inline-block; 
+            background: var(--main); 
+            color: #fff; 
+            padding: 12px 24px; 
+            border-radius: var(--radius); 
+            text-decoration: none; 
+            font-weight: 800; 
+            margin-bottom: 25px; 
+            font-size: 14px; 
+        }
         
-        .disclaimer-box { font-size: 10px; color: #bbb; margin-bottom: 15px; line-height: 1.4; padding: 0 10px; }
-        .disclaimer-box a { color: #888; text-decoration: underline; }
+        .disclaimer-box { 
+            font-size: 12px; 
+            color: #444; 
+            font-weight: 600; 
+            margin-bottom: 20px; 
+            line-height: 1.6; 
+            padding: 0 10px; 
+        }
+        .disclaimer-box a { 
+            color: var(--main); 
+            text-decoration: underline; 
+            text-decoration-thickness: 1.5px;
+        }
+
+        .footer-line { 
+            font-size: 13px; 
+            line-height: 1.8; 
+            color: #666; 
+            font-weight: 500;
+        }
+        .footer-line b { color: var(--main); font-weight: 800; }
     </style>
 </head>
 <body>
@@ -81,7 +114,7 @@
     <header>
         <div class="title-row">
             <h1>afrorakda Hub</h1>
-            <span class="progress-badge">89 / 100</span>
+            <span class="progress-badge">90 / 100</span>
         </div>
         <p class="subtitle">Building 100 minimalist tools for your daily life.</p>
     </header>
@@ -449,6 +482,10 @@
             <div class="icon-box"><img src="image_89.png" alt="Gap Viewer"></div>
             <span class="tool-name">Gap Viewer</span>
         </a>
+        <a href="https://afrorakda.github.io/paper-to-pixel/" class="tool-link" data-name="Paper to Pixel">
+            <div class="icon-box"><img src="image_90.png" alt="Paper to Pixel"></div>
+            <span class="tool-name">Paper to Pixel</span>
+        </a>
     </div>
 
     <footer>
@@ -460,7 +497,7 @@
         </div>
 
         <div class="footer-line">
-            <div>No login / No tracking / No ads / Browser only</div>
+            <div><b>No login / No tracking / No ads / Browser only</b></div>
             <div>afrorakda © 2026</div>
         </div>
     </footer>
