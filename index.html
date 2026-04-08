@@ -67,12 +67,55 @@
 
         #no-results { display: none; text-align: center; padding: 40px 0; color: #ccc; font-weight: 700; font-size: 0.9rem; }
 
-        footer { margin-top: auto; padding: 40px 0 20px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #f0f0f0; }
-        .kofi-btn { display: inline-block; background: var(--main); color: #fff; padding: 10px 20px; border-radius: var(--radius); text-decoration: none; font-weight: bold; margin-bottom: 20px; font-size: 13px; }
-        .footer-line { line-height: 1.6; color: #aaa; }
+        /* Footer Visibility Upgrade */
+        footer { 
+            margin-top: auto; 
+            padding: 50px 0 30px; 
+            text-align: center; 
+            border-top: 2px solid #f5f5f5; 
+        }
+        .kofi-btn { 
+            display: inline-block; 
+            background: var(--main); 
+            color: #fff; 
+            padding: 12px 24px; 
+            border-radius: var(--radius); 
+            text-decoration: none; 
+            font-weight: 800; 
+            margin-bottom: 30px; 
+            font-size: 14px; 
+        }
         
-        .disclaimer-box { font-size: 10px; color: #bbb; margin-bottom: 15px; line-height: 1.4; padding: 0 10px; }
-        .disclaimer-box a { color: #888; text-decoration: underline; }
+        .disclaimer-box { 
+            font-size: 13px; 
+            color: var(--main); /* コントラストを最大に */
+            font-weight: 600; 
+            margin-bottom: 25px; 
+            line-height: 1.6; 
+            padding: 0 10px; 
+        }
+        .disclaimer-box a { 
+            color: var(--main); 
+            text-decoration: underline; 
+            text-decoration-thickness: 2px; /* 下線を太く */
+            font-weight: 800;
+        }
+
+        .footer-line { 
+            font-size: 14px; 
+            line-height: 1.8; 
+            color: var(--main); /* 濃く変更 */
+            font-weight: 500;
+        }
+        .footer-line b { 
+            font-weight: 800;
+            letter-spacing: 0.2px;
+        }
+        .copyright {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -504,8 +547,8 @@
         </div>
 
         <div class="footer-line">
-            <div>No login / No tracking / No ads / Browser only</div>
-            <div>afrorakda © 2026</div>
+            <div><b>No login / No tracking / No ads / Browser only</b></div>
+            <div class="copyright">afrorakda © 2026</div>
         </div>
     </footer>
 </div>
