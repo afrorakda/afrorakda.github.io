@@ -32,17 +32,26 @@
         }
         .subtitle { font-size: 0.85rem; color: #666; font-weight: 500; }
 
-        .search-wrapper { margin-bottom: 15px; padding: 0 5px; }
+        /* 検索エリア */
+        .search-wrapper { margin-bottom: 15px; padding: 0 5px; position: relative; }
         .search-input {
-            width: 100%; padding: 15px 20px; border: 2px solid var(--accent);
+            width: 100%; padding: 15px 45px 15px 20px; border: 2px solid var(--accent);
             border-radius: var(--radius); background: var(--input-bg);
             font-size: 1rem; font-weight: 600; color: var(--main);
             box-sizing: border-box; outline: none; -webkit-appearance: none;
             opacity: 1 !important; -webkit-text-fill-color: var(--main);
         }
-        .search-input::placeholder { color: #ccc; }
+        /* 透かし文字をさらに薄く(#bbb) */
+        .search-input::placeholder { color: #bbb; -webkit-text-fill-color: #bbb; opacity: 1; }
 
-        /* カテゴリーボタンのスタイル */
+        /* クリアボタン */
+        .clr-btn {
+            position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+            background: none; border: none; font-size: 20px; color: #ccc;
+            cursor: pointer; padding: 5px; display: none; line-height: 1;
+        }
+
+        /* カテゴリーボタン */
         .category-wrapper { 
             display: flex; gap: 8px; overflow-x: auto; padding: 5px; margin-bottom: 25px;
             scrollbar-width: none; -ms-overflow-style: none;
@@ -143,7 +152,8 @@
     </header>
 
     <div class="search-wrapper">
-        <input type="text" id="searchInput" class="search-input" placeholder="Search by name or category..." oninput="updateView()">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search tools..." oninput="handleInput(this)">
+        <button id="clearBtn" class="clr-btn" onclick="clearSearch()">&times;</button>
     </div>
 
     <div class="category-wrapper" id="categoryWrapper">
@@ -602,7 +612,6 @@
 <script>
     let currentCategory = 'All';
 
-    // 自動カテゴリー判定用キーワードマップ
     const categoryMap = {
         'Text': ['cleaner', 'echo', 'char', 'word', 'bullet', 'chopper', 'killer', 'converter', 'master', 'washer', 'scrub', 'liner', 'flip', 'memo', 'lorem', 'namer', 'mark'],
         'Calc': ['cost', 'price', 'budget', 'spending', 'limit', 'splitter', 'duo', 'multiplier', 'hour', 'rem-to-pixel', 'timestamp', 'flip', 'metric', 'percentage', 'counter', 'offset', 'sec-to-clock'],
@@ -611,13 +620,11 @@
         'Life': ['tabata', 'breath', 'anchor', 'unclench', 'reader', 'stone', 'mirror', 'roulette', 'pace', 'checker', 'guide', 'oven', 'stain', 'dose', 'ready', 'judge', 'fortune', 'thought', 'reset', 'leak']
     };
 
-    // 初期化：すべてのツールにdata-categoryを自動付与
     function initCategories() {
         const tools = document.querySelectorAll('.tool-link');
         tools.forEach(tool => {
             const url = tool.href.toLowerCase();
-            let category = 'Life'; // デフォルト
-
+            let category = 'Life';
             for (const [cat, keywords] of Object.entries(categoryMap)) {
                 if (keywords.some(kw => url.includes(kw))) {
                     category = cat;
@@ -628,15 +635,26 @@
         });
     }
 
+    function handleInput(el) {
+        const clearBtn = document.getElementById('clearBtn');
+        clearBtn.style.display = el.value ? 'block' : 'none';
+        updateView();
+    }
+
+    function clearSearch() {
+        const input = document.getElementById('searchInput');
+        input.value = '';
+        document.getElementById('clearBtn').style.display = 'none';
+        input.focus();
+        updateView();
+    }
+
     function setCategory(category) {
         currentCategory = category;
-        
-        // ボタンの見た目更新
         const btns = document.querySelectorAll('.cat-btn');
         btns.forEach(btn => {
             btn.classList.toggle('active', btn.textContent === category);
         });
-
         updateView();
     }
 
@@ -650,7 +668,6 @@
         tools.forEach(tool => {
             const name = tool.getAttribute('data-name').toLowerCase();
             const category = tool.getAttribute('data-category');
-            
             const matchesQuery = name.includes(query);
             const matchesCategory = (currentCategory === 'All' || category === currentCategory);
 
@@ -666,7 +683,6 @@
         noResults.style.display = hasVisible ? 'none' : 'block';
     }
 
-    // 実行
     initCategories();
 </script>
 
