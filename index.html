@@ -32,14 +32,28 @@
         }
         .subtitle { font-size: 0.85rem; color: #666; font-weight: 500; }
 
-        .search-wrapper { margin-bottom: 30px; padding: 0 5px; }
+        .search-wrapper { margin-bottom: 15px; padding: 0 5px; }
         .search-input {
             width: 100%; padding: 15px 20px; border: 2px solid var(--accent);
             border-radius: var(--radius); background: var(--input-bg);
             font-size: 1rem; font-weight: 600; color: var(--main);
             box-sizing: border-box; outline: none; -webkit-appearance: none;
+            opacity: 1 !important; -webkit-text-fill-color: var(--main);
         }
         .search-input::placeholder { color: #ccc; }
+
+        /* カテゴリーボタンのスタイル */
+        .category-wrapper { 
+            display: flex; gap: 8px; overflow-x: auto; padding: 5px; margin-bottom: 25px;
+            scrollbar-width: none; -ms-overflow-style: none;
+        }
+        .category-wrapper::-webkit-scrollbar { display: none; }
+        .cat-btn {
+            white-space: nowrap; padding: 8px 16px; border-radius: var(--radius);
+            background: var(--accent); color: #666; font-size: 0.75rem; font-weight: 800;
+            border: none; cursor: pointer; transition: 0.2s;
+        }
+        .cat-btn.active { background: var(--main); color: #fff; }
 
         .grid { 
             display: grid; 
@@ -129,7 +143,16 @@
     </header>
 
     <div class="search-wrapper">
-        <input type="text" id="searchInput" class="search-input" placeholder="Search tools..." oninput="filterTools()">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by name or category..." oninput="updateView()">
+    </div>
+
+    <div class="category-wrapper" id="categoryWrapper">
+        <button class="cat-btn active" onclick="setCategory('All')">All</button>
+        <button class="cat-btn" onclick="setCategory('Text')">Text</button>
+        <button class="cat-btn" onclick="setCategory('Calc')">Calc</button>
+        <button class="cat-btn" onclick="setCategory('Dev')">Dev</button>
+        <button class="cat-btn" onclick="setCategory('Design')">Design</button>
+        <button class="cat-btn" onclick="setCategory('Life')">Life</button>
     </div>
 
     <div id="no-results">No tools found.</div>
@@ -539,28 +562,26 @@
             <div class="icon-box"><img src="image_101.png" alt="Sec to Clock"></div>
             <span class="tool-name">Sec to Clock</span>
         </a>
-<a href="https://afrorakda.github.io/50-30-20-budget-planner/" class="tool-link" data-name="Budget Planner">
+        <a href="https://afrorakda.github.io/50-30-20-budget-planner/" class="tool-link" data-name="Budget Planner">
             <div class="icon-box"><img src="image_102.png" alt="Budget Planner"></div>
             <span class="tool-name">Budget Planner</span>
         </a>
-<a href="https://afrorakda.github.io/daily-spending-limit/" class="tool-link" data-name="Daily Spending Limit">
-    <div class="icon-box"><img src="image_103.png" alt="Daily Spending Limit"></div>
-    <span class="tool-name">Daily Spending Limit</span>
-</a> 
-<a href="https://afrorakda.github.io/life-hour-calc/" class="tool-link" data-name="Life Hour Calc">
-    <div class="icon-box"><img src="image_104.png" alt="Life Hour Calc"></div>
-    <span class="tool-name">Life Hour Calc</span>
-</a>
-<a href="https://afrorakda.github.io/life-leak-tracker/" class="tool-link" data-name="Life Leak Tracker">
-    <div class="icon-box"><img src="image_105.png" alt="Life Leak Tracker"></div>
-    <span class="tool-name">Life Leak Tracker</span>
-</a> 
-<a href="https://afrorakda.github.io/pass-expiry-checker/" class="tool-link" data-name="Pass-Expiry Checker">
-    <div class="icon-box"><img src="image_106.png" alt="Pass-Expiry Checker"></div>
-    <span class="tool-name">Pass-Expiry Checker</span>
-</a>
-
-
+        <a href="https://afrorakda.github.io/daily-spending-limit/" class="tool-link" data-name="Daily Spending Limit">
+            <div class="icon-box"><img src="image_103.png" alt="Daily Spending Limit"></div>
+            <span class="tool-name">Daily Spending Limit</span>
+        </a> 
+        <a href="https://afrorakda.github.io/life-hour-calc/" class="tool-link" data-name="Life Hour Calc">
+            <div class="icon-box"><img src="image_104.png" alt="Life Hour Calc"></div>
+            <span class="tool-name">Life Hour Calc</span>
+        </a>
+        <a href="https://afrorakda.github.io/life-leak-tracker/" class="tool-link" data-name="Life Leak Tracker">
+            <div class="icon-box"><img src="image_105.png" alt="Life Leak Tracker"></div>
+            <span class="tool-name">Life Leak Tracker</span>
+        </a> 
+        <a href="https://afrorakda.github.io/pass-expiry-checker/" class="tool-link" data-name="Pass-Expiry Checker">
+            <div class="icon-box"><img src="image_106.png" alt="Pass-Expiry Checker"></div>
+            <span class="tool-name">Pass-Expiry Checker</span>
+        </a>
     </div>
 
     <footer>
@@ -579,7 +600,47 @@
 </div>
 
 <script>
-    function filterTools() {
+    let currentCategory = 'All';
+
+    // 自動カテゴリー判定用キーワードマップ
+    const categoryMap = {
+        'Text': ['cleaner', 'echo', 'char', 'word', 'bullet', 'chopper', 'killer', 'converter', 'master', 'washer', 'scrub', 'liner', 'flip', 'memo', 'lorem', 'namer', 'mark'],
+        'Calc': ['cost', 'price', 'budget', 'spending', 'limit', 'splitter', 'duo', 'multiplier', 'hour', 'rem-to-pixel', 'timestamp', 'flip', 'metric', 'percentage', 'counter', 'offset', 'sec-to-clock'],
+        'Dev': ['json', 'csv', 'code', 'scrubber', 'status', 'cron', 'slug', 'generator', 'contrast', 'sync', 'scaler', 'link', 'url', 'bitrate', 'warrant', 'pure'],
+        'Design': ['image', 'resizer', 'color', 'snap', 'eye', 'icon', 'mask', 'font', 'ratio', 'privacy', 'gap', 'viewer', 'filter', 'blind'],
+        'Life': ['tabata', 'breath', 'anchor', 'unclench', 'reader', 'stone', 'mirror', 'roulette', 'pace', 'checker', 'guide', 'oven', 'stain', 'dose', 'ready', 'judge', 'fortune', 'thought', 'reset', 'leak']
+    };
+
+    // 初期化：すべてのツールにdata-categoryを自動付与
+    function initCategories() {
+        const tools = document.querySelectorAll('.tool-link');
+        tools.forEach(tool => {
+            const url = tool.href.toLowerCase();
+            let category = 'Life'; // デフォルト
+
+            for (const [cat, keywords] of Object.entries(categoryMap)) {
+                if (keywords.some(kw => url.includes(kw))) {
+                    category = cat;
+                    break;
+                }
+            }
+            tool.setAttribute('data-category', category);
+        });
+    }
+
+    function setCategory(category) {
+        currentCategory = category;
+        
+        // ボタンの見た目更新
+        const btns = document.querySelectorAll('.cat-btn');
+        btns.forEach(btn => {
+            btn.classList.toggle('active', btn.textContent === category);
+        });
+
+        updateView();
+    }
+
+    function updateView() {
         const query = document.getElementById('searchInput').value.toLowerCase();
         const tools = document.querySelectorAll('.tool-link');
         const grid = document.getElementById('toolGrid');
@@ -588,7 +649,12 @@
 
         tools.forEach(tool => {
             const name = tool.getAttribute('data-name').toLowerCase();
-            if (name.includes(query)) {
+            const category = tool.getAttribute('data-category');
+            
+            const matchesQuery = name.includes(query);
+            const matchesCategory = (currentCategory === 'All' || category === currentCategory);
+
+            if (matchesQuery && matchesCategory) {
                 tool.style.display = 'flex';
                 hasVisible = true;
             } else {
@@ -599,6 +665,9 @@
         grid.style.display = hasVisible ? 'grid' : 'none';
         noResults.style.display = hasVisible ? 'none' : 'block';
     }
+
+    // 実行
+    initCategories();
 </script>
 
 </body>
