@@ -264,14 +264,13 @@
     function initCategories() {
         const tools = document.querySelectorAll('.tool-link');
         tools.forEach(tool => {
-            // data-nameの値を取得し、前後のスペースを削除
             const name = (tool.getAttribute('data-name') || "").toLowerCase().trim();
             const url = tool.href.toLowerCase();
             let assigned = 'Life'; // デフォルト
 
             for (const [cat, keywords] of Object.entries(categoryMap)) {
-                // 名前またはURLにキーワードが含まれているかチェック
-                if (keywords.some(kw => name.includes(kw) || url.includes(kw))) {
+                // 名前またはURLにキーワードが1つでも含まれていたら即割り当て
+                if (keywords.some(kw => name.indexOf(kw) !== -1 || url.indexOf(kw) !== -1)) {
                     assigned = cat;
                     break;
                 }
@@ -315,7 +314,7 @@
             const name = (tool.getAttribute('data-name') || "").toLowerCase().trim();
             const category = tool.getAttribute('data-category');
             
-            const matchesQuery = name.includes(query);
+            const matchesQuery = name.indexOf(query) !== -1;
             const matchesCategory = (currentCategory === 'All' || category === currentCategory);
 
             if (matchesQuery && matchesCategory) {
@@ -371,12 +370,10 @@
         }
     }
 
-    // 読み込み完了時に実行
-    window.onload = () => {
-        initCategories();
-        updateView();
-        loadFooter();
-    };
+    // 実行順序を整理
+    initCategories();
+    updateView();
+    loadFooter();
 </script>
 
 </body>
