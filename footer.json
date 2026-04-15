@@ -4,7 +4,11 @@
     "url": "https://ko-fi.com/afrorakda"
   },
   "install": {
-    "text": "Add Home"
+    "text": "Add Home",
+    "title": "📱 Install",
+    "msg": "Add to your home screen.",
+    "ios": "🍏 <strong>iPhone (Safari):</strong><br>Tap Share, then Add to Home Screen.",
+    "android": "🤖 <strong>Android (Chrome):</strong><br>Tap Menu (⋮), then Add to Home Screen."
   },
   "privacy": {
     "text": "Privacy Policy",
