@@ -33,7 +33,6 @@
         .progress-badge { background: var(--main); color: #fff; padding: 2px 10px; border-radius: var(--radius); font-size: 0.7rem; font-weight: 800; }
         .subtitle { font-size: 0.85rem; color: #666; font-weight: 500; }
 
-        /* Search Section */
         .search-wrapper { margin-bottom: 25px; padding: 0 5px; position: relative; }
         .search-input {
             width: 100%; padding: 15px 45px 15px 20px; border: 2px solid var(--accent);
@@ -45,7 +44,6 @@
         .search-input::placeholder { color: #bbb; -webkit-text-fill-color: #bbb; opacity: 1; }
         .clr-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 20px; color: #ccc; cursor: pointer; padding: 5px; display: none; }
 
-        /* Selection & Grid Settings (120 tools) */
         .selection-title { font-size: 0.75rem; font-weight: 800; color: #999; margin: 0 0 10px 5px; text-transform: uppercase; letter-spacing: 1px; }
         .selection-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 30px; padding: 0 5px; }
         .select-card { text-decoration: none; background: var(--input-bg); border: 2px solid var(--accent); border-radius: var(--radius); padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; transition: 0.2s; }
@@ -74,25 +72,14 @@
         #no-results { display: none; text-align: center; padding: 40px 0; color: #ccc; font-weight: 700; }
 
         /* Dynamic Footer System */
-        footer { 
-            margin-top: auto; 
-            padding: 30px 0 20px; 
-            text-align: center; 
-            border-top: 1px solid #f5f5f5;
-            /* 指示通り: 文字を大きく、濃く */
-            font-size: 12px; 
-            color: #666; 
-            font-weight: 600;
-        }
-        
+        footer { margin-top: auto; padding: 30px 0 20px; text-align: center; border-top: 1px solid #f5f5f5; font-size: 12px; color: #666; font-weight: 600; }
         .footer-btns { display: flex; gap: 10px; margin-bottom: 20px; padding: 0 5px; }
         .kofi-btn { flex: 6; background: var(--main); color: #fff; padding: 12px; border-radius: var(--radius); text-decoration: none; font-weight: bold; font-size: 13px; display: flex; align-items: center; justify-content: center; }
         .home-btn { flex: 4; background: var(--accent); color: var(--main); border: none; padding: 12px; border-radius: var(--radius); font-weight: 800; font-size: 12px; cursor: pointer; }
-        
         .footer-info { line-height: 1.6; }
         .footer-info a { color: inherit; text-decoration: underline; }
 
-        /* Modal */
+        /* Modal (Structure will be dynamic, but styles stay here) */
         #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 100; }
         .modal-content { background: #fff; width: 85%; max-width: 340px; padding: 30px; border-radius: var(--radius); text-align: left; position: relative; }
         .close-x { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #888; cursor: pointer; }
@@ -267,16 +254,6 @@
         </footer>
 </div>
 
-<div id="modal" onclick="hideModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close-x" onclick="hideModal()">×</span>
-        <h3 style="margin-top:0;">📱 Install</h3>
-        <p style="font-size:14px; font-weight:600;">Add to your home screen.</p>
-        <p style="font-size:13px; color:#666;">🍏 <strong>iPhone (Safari):</strong><br>Tap Share, then Add to Home Screen.</p>
-        <p style="font-size:13px; color:#666;">🤖 <strong>Android (Chrome):</strong><br>Tap Menu (⋮), then Add to Home Screen.</p>
-    </div>
-</div>
-
 <script>
     let currentCategory = 'All';
     const categoryMap = {
@@ -353,14 +330,23 @@
         noResults.style.display = hasVisible ? 'none' : 'block';
     }
 
-    function showModal() { document.getElementById('modal').style.display = 'flex'; }
-    function hideModal() { document.getElementById('modal').style.display = 'none'; }
+    // Modal Control Functions (Globally accessible)
+    function showModal() { 
+        const modal = document.getElementById('modal');
+        if(modal) modal.style.display = 'flex'; 
+    }
+    function hideModal() { 
+        const modal = document.getElementById('modal');
+        if(modal) modal.style.display = 'none'; 
+    }
 
     // Dynamic Footer Loader
     async function loadFooter() {
         try {
             const response = await fetch('footer.json');
             const data = await response.json();
+
+            // Inject Footer HTML
             document.getElementById('dynamic-footer').innerHTML = `
                 <div class="footer-btns">
                     <a href="${data.kofi.url}" target="_blank" class="kofi-btn">${data.kofi.text}</a>
@@ -371,6 +357,22 @@
                     <a href="${data.privacy.url}">${data.privacy.text}</a> / ${data.author}
                 </div>
             `;
+
+            // Inject Modal HTML into body
+            const modalDiv = document.createElement('div');
+            modalDiv.id = 'modal';
+            modalDiv.onclick = hideModal;
+            modalDiv.innerHTML = `
+                <div class="modal-content" onclick="event.stopPropagation()">
+                    <span class="close-x" onclick="hideModal()">×</span>
+                    <h3 style="margin-top:0;">${data.install.title}</h3>
+                    <p style="font-size:14px; font-weight:600;">${data.install.msg}</p>
+                    <p style="font-size:13px; color:#666;">${data.install.ios}</p>
+                    <p style="font-size:13px; color:#666;">${data.install.android}</p>
+                </div>
+            `;
+            document.body.appendChild(modalDiv);
+
         } catch (err) {
             console.error("Footer load failed", err);
         }
