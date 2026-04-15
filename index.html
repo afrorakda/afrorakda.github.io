@@ -94,6 +94,7 @@
 
         #no-results { display: none; text-align: center; padding: 40px 0; color: #ccc; font-weight: 700; }
 
+        /* Footer System */
         footer { margin-top: auto; padding: 50px 0 30px; text-align: center; border-top: 1px solid #f5f5f5; }
         .kofi-btn { 
             display: inline-block; background: var(--main); color: #fff; 
@@ -102,6 +103,7 @@
         }
         .footer-nav { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
         .nav-link { font-size: 13px; font-weight: 800; color: var(--main); text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
+        
         .footer-info { font-size: 11px; color: #999; font-weight: 600; line-height: 1.6; margin-bottom: 15px; }
         .footer-info a { color: var(--main); text-decoration: underline; }
         .footer-line { font-size: 12px; color: var(--main); font-weight: 800; line-height: 1.5; }
@@ -127,13 +129,34 @@
         <p class="selection-title">Targeted Selection</p>
         <div class="selection-grid">
             <a href="#" class="select-card" onclick="setCategory('Text'); return false;">
-                <div class="card-info"><span class="card-icon">✍️</span><div class="card-text"><span class="card-label">For SNS Marketers</span><span class="card-sub">Cleaner, Word count...</span></div></div><span class="arrow">→</span>
+                <div class="card-info">
+                    <span class="card-icon">✍️</span>
+                    <div class="card-text">
+                        <span class="card-label">For SNS Marketers</span>
+                        <span class="card-sub">Cleaner, Word count, Line break...</span>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
             </a>
             <a href="#" class="select-card" onclick="setCategory('Life'); return false;">
-                <div class="card-info"><span class="card-icon">🏠</span><div class="card-text"><span class="card-label">For Daily Life</span><span class="card-sub">Unit price, Percentage...</span></div></div><span class="arrow">→</span>
+                <div class="card-info">
+                    <span class="card-icon">🏠</span>
+                    <div class="card-text">
+                        <span class="card-label">For Daily Life</span>
+                        <span class="card-sub">Unit price, Percentage, Roulette...</span>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
             </a>
             <a href="#" class="select-card" onclick="setCategory('Dev'); return false;">
-                <div class="card-info"><span class="card-icon">💻</span><div class="card-text"><span class="card-label">For Developers</span><span class="card-sub">QR Gen, JSON...</span></div></div><span class="arrow">→</span>
+                <div class="card-info">
+                    <span class="card-icon">💻</span>
+                    <div class="card-text">
+                        <span class="card-label">For Developers</span>
+                        <span class="card-sub">QR Gen, JSON, Color Picker...</span>
+                    </div>
+                </div>
+                <span class="arrow">→</span>
             </a>
         </div>
     </div>
@@ -151,51 +174,107 @@
 
     <div class="grid" id="toolGrid">
         <a href="https://afrorakda.github.io/Fridge-Combo/" class="tool-link" data-name="Fridge Combo"><div class="icon-box"><img src="image_1.png"></div><span class="tool-name">Fridge Combo</span></a>
-        <a href="https://afrorakda.github.io/smart-text-cleaner/" class="tool-link" data-name="Text Cleaner"><div class="icon-box"><img src="image_2.png"></div><span class="tool-name">Text Cleaner</span></a>
-        <a href="https://afrorakda.github.io/metric-flip/" class="tool-link" data-name="Metric Flip"><div class="icon-box"><img src="image_3.png"></div><span class="tool-name">Metric Flip</span></a>
-        <a href="https://afrorakda.github.io/pure-link/" class="tool-link" data-name="Pure Link"><div class="icon-box"><img src="image_4.png"></div><span class="tool-name">Pure Link</span></a>
-        <a href="https://afrorakda.github.io/letter-flip/" class="tool-link" data-name="Letter Flip"><div class="icon-box"><img src="image_5.png"></div><span class="tool-name">Letter Flip</span></a>
-        <a href="https://afrorakda.github.io/quick-qr/" class="tool-link" data-name="Quick QR"><div class="icon-box"><img src="image_6.png"></div><span class="tool-name">Quick QR</span></a>
-        <a href="https://afrorakda.github.io/simple-counter/" class="tool-link" data-name="Simple Counter"><div class="icon-box"><img src="image_7.png"></div><span class="tool-name">Simple Counter</span></a>
-        <a href="https://afrorakda.github.io/unit-price-calc/" class="tool-link" data-name="Unit Price"><div class="icon-box"><img src="image_8.png"></div><span class="tool-name">Unit Price</span></a>
-        <a href="https://afrorakda.github.io/eye-opener/" class="tool-link" data-name="Eye Opener"><div class="icon-box"><img src="image_9.png"></div><span class="tool-name">Eye Opener</span></a>
-        <a href="https://afrorakda.github.io/true-cost/" class="tool-link" data-name="True Cost"><div class="icon-box"><img src="image_10.png"></div><span class="tool-name">True Cost</span></a>
-        <a href="https://afrorakda.github.io/simple-memo/" class="tool-link" data-name="Simple Memo"><div class="icon-box"><img src="image_11.png"></div><span class="tool-name">Simple Memo</span></a>
-        <a href="https://afrorakda.github.io/next-dose/" class="tool-link" data-name="Next Dose"><div class="icon-box"><img src="image_12.png"></div><span class="tool-name">Next Dose</span></a>
-        <a href="https://afrorakda.github.io/tag-cleaner/" class="tool-link" data-name="Tag Cleaner"><div class="icon-box"><img src="image_13.png"></div><span class="tool-name">Tag Cleaner</span></a>
-        <a href="https://afrorakda.github.io/my-menu-roulette/" class="tool-link" data-name="My Menu Roulette"><div class="icon-box"><img src="image_14.png"></div><span class="tool-name">My Menu Roulette</span></a>
-        <a href="https://afrorakda.github.io/lorem-ipsum/" class="tool-link" data-name="Lorem Ipsum"><div class="icon-box"><img src="image_15.png"></div><span class="tool-name">Lorem Ipsum</span></a>
-        <a href="https://afrorakda.github.io/hidden-space-finder/" class="tool-link" data-name="Hidden Space Finder"><div class="icon-box"><img src="image_16.png"></div><span class="tool-name">Hidden Space Finder</span></a>
-        <a href="https://afrorakda.github.io/headline-master/" class="tool-link" data-name="Headline Master"><div class="icon-box"><img src="image_17.png"></div><span class="tool-name">Headline Master</span></a>
-        <a href="https://afrorakda.github.io/slug-maker/" class="tool-link" data-name="Slug Maker"><div class="icon-box"><img src="image_18.png"></div><span class="tool-name">Slug Maker</span></a>
-        <a href="https://afrorakda.github.io/insta-liner/" class="tool-link" data-name="Insta Liner"><div class="icon-box"><img src="image_19.png"></div><span class="tool-name">Insta Liner</span></a>
-        <a href="https://afrorakda.github.io/line-decorator/" class="tool-link" data-name="Line Decorator"><div class="icon-box"><img src="image_20.png"></div><span class="tool-name">Line Decorator</span></a>
-        <a href="https://afrorakda.github.io/parallel-timer/" class="tool-link" data-name="Parallel Timer"><div class="icon-box"><img src="image_21.png"></div><span class="tool-name">Parallel Timer</span></a>
-        <a href="https://afrorakda.github.io/color-snap/" class="tool-link" data-name="Color Snap"><div class="icon-box"><img src="image_22.png"></div><span class="tool-name">Color Snap</span></a>
-        <a href="https://afrorakda.github.io/font-picker/" class="tool-link" data-name="Font Picker"><div class="icon-box"><img src="image_23.png"></div><span class="tool-name">Font Picker</span></a>
-        <a href="https://afrorakda.github.io/currency-duo/" class="tool-link" data-name="Currency Duo"><div class="icon-box"><img src="image_24.png"></div><span class="tool-name">Currency Duo</span></a>
-        <a href="https://afrorakda.github.io/title-namer/" class="tool-link" data-name="Title Namer"><div class="icon-box"><img src="image_25.png"></div><span class="tool-name">Title Namer</span></a>
-        <a href="https://afrorakda.github.io/json-clean/" class="tool-link" data-name="Json-clean"><div class="icon-box"><img src="image_26.png"></div><span class="tool-name">Json-clean</span></a>
-        <a href="https://afrorakda.github.io/link-cleaner/" class="tool-link" data-name="Link Cleaner"><div class="icon-box"><img src="image_27.png"></div><span class="tool-name">Link Cleaner</span></a>
-        <a href="https://afrorakda.github.io/status-code/" class="tool-link" data-name="Status Code"><div class="icon-box"><img src="image_28.png"></div><span class="tool-name">Status Code</span></a>
-        <a href="https://afrorakda.github.io/json-key-picker/" class="tool-link" data-name="JSON Key Picker"><div class="icon-box"><img src="image_29.png"></div><span class="tool-name">JSON Key Picker</span></a>
-        <a href="https://afrorakda.github.io/unix-timestamp-converter/" class="tool-link" data-name="Unix Timestamp Converter"><div class="icon-box"><img src="image_30.png"></div><span class="tool-name">Unix Timestamp Converter</span></a>
-        <a href="https://afrorakda.github.io/contrast-checker/" class="tool-link" data-name="Contrast Checker"><div class="icon-box"><img src="image_31.png"></div><span class="tool-name">Contrast Checker</span></a>
-        <a href="https://afrorakda.github.io/json-to-csv/" class="tool-link" data-name="JSON to CSV"><div class="icon-box"><img src="image_32.png"></div><span class="tool-name">JSON to CSV</span></a>
-        <a href="https://afrorakda.github.io/quick-clip/" class="tool-link" data-name="Quick Clip"><div class="icon-box"><img src="image_33.png"></div><span class="tool-name">Quick Clip</span></a>
-        <a href="https://afrorakda.github.io/quick-image-resizer/" class="tool-link" data-name="Quick Image Resizer"><div class="icon-box"><img src="image_34.png"></div><span class="tool-name">Quick Image Resizer</span></a>
-        <a href="https://afrorakda.github.io/8-rounds-tabata/" class="tool-link" data-name="8 Rounds Tabata"><div class="icon-box"><img src="image_35.png"></div><span class="tool-name">8 Rounds Tabata</span></a>
-        <a href="https://afrorakda.github.io/recipe-multiplier/" class="tool-link" data-name="Recipe Multiplier"><div class="icon-box"><img src="image_36.png"></div><span class="tool-name">Recipe Multiplier</span></a>
-        <a href="https://afrorakda.github.io/color-tap-copy/" class="tool-link" data-name="Color Tap & Copy"><div class="icon-box"><img src="image_37.png"></div><span class="tool-name">Color Tap & Copy</span></a>
-        <a href="https://afrorakda.github.io/simple-words/" class="tool-link" data-name="Simple Words"><div class="icon-box"><img src="image_38.png"></div><span class="tool-name">Simple Words</span></a>
-        <a href="https://afrorakda.github.io/focus-reader/" class="tool-link" data-name="Focus Reader"><div class="icon-box"><img src="image_39.png"></div><span class="tool-name">Focus Reader</span></a>
-        <a href="https://afrorakda.github.io/twin-time/" class="tool-link" data-name="Twin Time"><div class="icon-box"><img src="image_40.png"></div><span class="tool-name">Twin Time</span></a>
-        <a href="https://afrorakda.github.io/mark-it/" class="tool-link" data-name="Mark It"><div class="icon-box"><img src="image_41.png"></div><span class="tool-name">Mark It</span></a>
-        <a href="https://afrorakda.github.io/invisible-char-remover/" class="tool-link" data-name="Invisible Char Remover"><div class="icon-box"><img src="image_42.png"></div><span class="tool-name">Invisible Char Remover</span></a>
-        <a href="https://afrorakda.github.io/bracket-cleaner/" class="tool-link" data-name="Bracket Cleaner"><div class="icon-box"><img src="image_43.png" alt="Bracket Cleaner"></div><span class="tool-name">Bracket Cleaner</span></a>
-        <a href="https://afrorakda.github.io/simple-mirror/" class="tool-link" data-name="Simple Mirror"><div class="icon-box"><img src="image_44.png"></div><span class="tool-name">Simple Mirror</span></a>
-        <a href="https://afrorakda.github.io/ready-go/" class="tool-link" data-name="Ready Go"><div class="icon-box"><img src="image_45.png"></div><span class="tool-name">Ready Go</span></a>
-        <a href="https://afrorakda.github.io/breath-478/" class="tool-link" data-name="Breath 478"><div class="icon-box"><img src="image_46.png"></div><span class="tool-name">Breath 478</span></a>
-        <a href="https://afrorakda.github.io/spice-key/" class="tool-link" data-name="Spice Key"><div class="icon-box"><img src="image_47.png"></div><span class="tool-name">Spice Key</span></a>
-        <a href="https://afrorakda.github.io/unclench/" class="tool-link" data-name="UNCLENCH"><div class="icon-box"><img src="image_48.png"></div><span class="tool-name">UNCLENCH</span></a>
-        <a href="https://afrorakda.github.io/anger-anchor/" class="tool-link" data-name="Anger Anchor"><div class="icon-box"><img src="image_49.png"></div><span class="tool-name">Anger Anchor</span></a>
+        <a href="https://afrorakda.github.io/cross-ratio/" class="tool-link" data-name="Cross Ratio"><div class="icon-box"><img src="image_120.png"></div><span class="tool-name">Cross Ratio</span></a>
+    </div>
+
+    <footer>
+        <a href="https://ko-fi.com/afrorakda" target="_blank" class="kofi-btn">☕️buy me a coffee</a>
+        
+        <div class="footer-nav">
+            <a href="https://afrorakda.github.io/" class="nav-link">HOME</a>
+            <a href="#" class="nav-link" onclick="alert('Add to Home Screen to install.'); return false;">INSTALL</a>
+        </div>
+
+        <div class="footer-info">
+            Free to use / Commercial use OK / No Warranty<br>
+            Read our <a href="https://afrorakda.github.io/privacy-policy.html">Privacy Policy</a>
+        </div>
+
+        <div class="footer-line">
+            🏠 | No login / No tracking / No ads / Browser only<br>
+            afrorakda © 2026
+        </div>
+    </footer>
+</div>
+
+<script>
+    let currentCategory = 'All';
+    const categoryMap = {
+        'Text': ['cleaner', 'echo', 'char', 'word', 'bullet', 'chopper', 'killer', 'converter', 'master', 'washer', 'scrub', 'liner', 'flip', 'memo', 'lorem', 'namer', 'mark', 'readable', 'plain-text', 'scrambler', 'sanitizer'],
+        'Calc': ['cost', 'price', 'budget', 'spending', 'limit', 'splitter', 'duo', 'multiplier', 'hour', 'rem-to-pixel', 'timestamp', 'metric', 'percentage', 'counter', 'offset', 'sec-to-clock', 'ratio', 'mix-ratio', 'cross-ratio'],
+        'Dev': ['json', 'csv', 'code', 'scrubber', 'status', 'cron', 'slug', 'generator', 'contrast', 'sync', 'scaler', 'link', 'url', 'bitrate', 'warrant', 'pure', 'http', 'hash', 'headers'],
+        'Design': ['image', 'resizer', 'color', 'snap', 'eye', 'icon', 'mask', 'font', 'ratio', 'privacy', 'gap', 'viewer', 'filter', 'blind', 'palette', 'mood'],
+        'Life': ['tabata', 'breath', 'anchor', 'unclench', 'reader', 'stone', 'mirror', 'roulette', 'pace', 'checker', 'guide', 'oven', 'stain', 'dose', 'ready', 'judge', 'fortune', 'thought', 'reset', 'leak', 'wake-up', 'pass-expiry', 'subs-quit', 'my-bad']
+    };
+
+    function initCategories() {
+        document.querySelectorAll('.tool-link').forEach(tool => {
+            const url = tool.href.toLowerCase();
+            let category = 'Life';
+            for (const [cat, keywords] of Object.entries(categoryMap)) {
+                if (keywords.some(kw => url.includes(kw))) { category = cat; break; }
+            }
+            tool.setAttribute('data-category', category);
+        });
+    }
+
+    function handleInput(el) {
+        document.getElementById('clearBtn').style.display = el.value ? 'block' : 'none';
+        toggleSelection();
+        updateView();
+    }
+
+    function clearSearch() {
+        const input = document.getElementById('searchInput');
+        input.value = '';
+        document.getElementById('clearBtn').style.display = 'none';
+        toggleSelection();
+        input.focus();
+        updateView();
+    }
+
+    function setCategory(category) {
+        currentCategory = category;
+        document.querySelectorAll('.cat-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent === category);
+        });
+        toggleSelection();
+        updateView();
+        if (category !== 'All') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function toggleSelection() {
+        const query = document.getElementById('searchInput').value;
+        document.getElementById('selectionArea').style.display = (query || currentCategory !== 'All') ? 'none' : 'block';
+    }
+
+    function updateView() {
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        const tools = document.querySelectorAll('.tool-link');
+        const grid = document.getElementById('toolGrid');
+        const noResults = document.getElementById('no-results');
+        let hasVisible = false;
+
+        tools.forEach(tool => {
+            const name = tool.getAttribute('data-name').toLowerCase();
+            const category = tool.getAttribute('data-category');
+            const matchesQuery = name.includes(query);
+            const matchesCategory = (currentCategory === 'All' || category === currentCategory);
+            if (matchesQuery && matchesCategory) {
+                tool.style.display = 'flex';
+                hasVisible = true;
+            } else {
+                tool.style.display = 'none';
+            }
+        });
+        grid.style.display = hasVisible ? 'grid' : 'none';
+        noResults.style.display = hasVisible ? 'none' : 'block';
+    }
+
+    initCategories();
+</script>
+
+</body>
+</html>
