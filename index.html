@@ -264,12 +264,14 @@
     function initCategories() {
         const tools = document.querySelectorAll('.tool-link');
         tools.forEach(tool => {
+            // data-nameの値を取得し、前後のスペースを削除
+            const name = (tool.getAttribute('data-name') || "").toLowerCase().trim();
             const url = tool.href.toLowerCase();
-            const name = tool.getAttribute('data-name').toLowerCase();
-            let assigned = 'Life'; // デフォルト設定
+            let assigned = 'Life'; // デフォルト
 
             for (const [cat, keywords] of Object.entries(categoryMap)) {
-                if (keywords.some(kw => url.includes(kw) || name.includes(kw))) {
+                // 名前またはURLにキーワードが含まれているかチェック
+                if (keywords.some(kw => name.includes(kw) || url.includes(kw))) {
                     assigned = cat;
                     break;
                 }
@@ -300,7 +302,7 @@
     }
 
     function updateView() {
-        const query = document.getElementById('searchInput').value.toLowerCase();
+        const query = (document.getElementById('searchInput').value || "").toLowerCase().trim();
         const tools = document.querySelectorAll('.tool-link');
         const grid = document.getElementById('toolGrid');
         const noResults = document.getElementById('no-results');
@@ -310,7 +312,7 @@
         selectionArea.style.display = (query || currentCategory !== 'All') ? 'none' : 'block';
 
         tools.forEach(tool => {
-            const name = tool.getAttribute('data-name').toLowerCase();
+            const name = (tool.getAttribute('data-name') || "").toLowerCase().trim();
             const category = tool.getAttribute('data-category');
             
             const matchesQuery = name.includes(query);
@@ -369,12 +371,12 @@
         }
     }
 
-    // すべての処理を順序立てて実行
-    window.addEventListener('DOMContentLoaded', () => {
+    // 読み込み完了時に実行
+    window.onload = () => {
         initCategories();
         updateView();
         loadFooter();
-    });
+    };
 </script>
 
 </body>
