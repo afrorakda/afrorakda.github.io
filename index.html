@@ -94,13 +94,33 @@
 
         #no-results { display: none; text-align: center; padding: 40px 0; color: #ccc; font-weight: 700; }
 
-        footer { margin-top: auto; padding: 50px 0 30px; text-align: center; border-top: 1px solid #f5f5f5; }
-        .kofi-btn { display: inline-block; background: var(--main); color: #fff; padding: 12px 24px; border-radius: var(--radius); text-decoration: none; font-weight: 800; margin-bottom: 20px; font-size: 14px; }
-        .footer-nav { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
-        .nav-link { font-size: 13px; font-weight: 800; color: var(--main); text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 2px; }
-        .footer-info { font-size: 11px; color: #999; font-weight: 600; line-height: 1.6; margin-bottom: 15px; }
-        .footer-info a { color: var(--main); text-decoration: underline; }
-        .footer-line { font-size: 12px; color: var(--main); font-weight: 800; line-height: 1.5; }
+        /* Footer System: Sort Pureレイアウト踏襲 */
+        footer { margin-top: auto; padding: 30px 0 20px; text-align: center; border-top: 1px solid #f5f5f5; }
+        
+        .footer-btns { display: flex; gap: 10px; margin-bottom: 20px; padding: 0 5px; }
+        .kofi-btn {
+            flex: 6; background: var(--main); color: #fff; padding: 12px; border-radius: var(--radius);
+            text-decoration: none; font-weight: bold; font-size: 13px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .home-btn {
+            flex: 4; background: var(--accent); color: var(--main); border: none; padding: 12px;
+            border-radius: var(--radius); font-weight: 800; font-size: 12px; cursor: pointer;
+        }
+        
+        .footer-info { font-size: 10px; color: #aaa; line-height: 1.6; font-weight: 500; }
+        .footer-info a { color: inherit; text-decoration: underline; }
+
+        /* Modal */
+        #modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 100;
+        }
+        .modal-content {
+            background: #fff; width: 85%; max-width: 340px; padding: 30px;
+            border-radius: var(--radius); text-align: left; position: relative;
+        }
+        .close-x { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #888; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -269,23 +289,26 @@
     </div>
 
     <footer>
-        <a href="https://ko-fi.com/afrorakda" target="_blank" class="kofi-btn">☕️buy me a coffee</a>
-        
-        <div class="footer-nav">
-            <a href="https://afrorakda.github.io/" class="nav-link">HOME</a>
-            <a href="#" class="nav-link" onclick="alert('Add to Home Screen to install.'); return false;">INSTALL</a>
+        <div class="footer-btns">
+            <a href="https://ko-fi.com/afrorakda" target="_blank" class="kofi-btn">☕️buy me a coffee</a>
+            <button class="home-btn" onclick="showModal()">Add Home</button>
         </div>
 
         <div class="footer-info">
-            Free to use / Commercial use OK / No Warranty<br>
-            Read our <a href="https://afrorakda.github.io/privacy-policy.html">Privacy Policy</a>
-        </div>
-
-        <div class="footer-line">
-            🏠 | No login / No tracking / No ads / Browser only<br>
-            afrorakda © 2026
+            No login / No tracking / No ads / Browser only<br>
+            <a href="https://afrorakda.com/privacy/">Privacy Policy</a> / afrorakda © 2026
         </div>
     </footer>
+</div>
+
+<div id="modal" onclick="hideModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-x" onclick="hideModal()">×</span>
+        <h3 style="margin-top:0;">📱 Install</h3>
+        <p style="font-size:14px; font-weight:600;">Add to your home screen.</p>
+        <p style="font-size:13px; color:#666;">🍏 <strong>iPhone (Safari):</strong><br>Tap Share, then Add to Home Screen.</p>
+        <p style="font-size:13px; color:#666;">🤖 <strong>Android (Chrome):</strong><br>Tap Menu (⋮), then Add to Home Screen.</p>
+    </div>
 </div>
 
 <script>
@@ -363,6 +386,9 @@
         grid.style.display = hasVisible ? 'grid' : 'none';
         noResults.style.display = hasVisible ? 'none' : 'block';
     }
+
+    function showModal() { document.getElementById('modal').style.display = 'flex'; }
+    function hideModal() { document.getElementById('modal').style.display = 'none'; }
 
     initCategories();
 </script>
