@@ -60,7 +60,6 @@
         .cat-btn { white-space: nowrap; padding: 8px 16px; border-radius: var(--radius); background: var(--accent); color: #666; font-size: 0.75rem; font-weight: 800; border: none; cursor: pointer; }
         .cat-btn.active { background: var(--main); color: #fff; }
 
-        /* Grid System Restored */
         .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
         @media (min-width: 500px) { .grid { grid-template-columns: repeat(5, 1fr); } }
 
@@ -72,7 +71,6 @@
 
         #no-results { display: none; text-align: center; padding: 40px 0; color: #ccc; font-weight: 700; }
 
-        /* Dynamic Footer */
         footer { margin-top: auto; padding: 30px 0 20px; text-align: center; border-top: 1px solid #f5f5f5; font-size: 12px; color: #666; font-weight: 600; }
         .footer-btns { display: flex; gap: 10px; margin-bottom: 20px; padding: 0 5px; }
         .kofi-btn { flex: 6; background: var(--main); color: #fff; padding: 12px; border-radius: var(--radius); text-decoration: none; font-weight: bold; font-size: 13px; display: flex; align-items: center; justify-content: center; }
@@ -255,10 +253,11 @@
 
 <script>
     let currentCategory = 'All';
+    // キーワード判定を強化
     const categoryMap = {
         'Text': ['cleaner', 'echo', 'char', 'word', 'bullet', 'chopper', 'killer', 'converter', 'master', 'washer', 'scrub', 'liner', 'flip', 'memo', 'lorem', 'namer', 'mark', 'readable', 'plain-text', 'scrambler', 'sanitizer'],
         'Calc': ['cost', 'price', 'budget', 'spending', 'limit', 'splitter', 'duo', 'multiplier', 'hour', 'rem-to-pixel', 'timestamp', 'metric', 'percentage', 'counter', 'offset', 'sec-to-clock', 'ratio', 'mix-ratio', 'cross-ratio'],
-        'Dev': ['json', 'csv', 'code', 'scrubber', 'status', 'cron', 'slug', 'generator', 'contrast', 'sync', 'scaler', 'link', 'url', 'bitrate', 'warrant', 'pure', 'http', 'hash', 'headers'],
+        'Dev': ['json', 'csv', 'code', 'scrubber', 'status', 'cron', 'slug', 'generator', 'contrast', 'sync', 'scaler', 'link', 'url', 'bitrate', 'warrant', 'pure', 'http', 'hash', 'headers', 'symbol'],
         'Design': ['image', 'resizer', 'color', 'snap', 'eye', 'icon', 'mask', 'font', 'ratio', 'privacy', 'gap', 'viewer', 'filter', 'blind', 'palette', 'mood'],
         'Life': ['tabata', 'breath', 'anchor', 'unclench', 'reader', 'stone', 'mirror', 'roulette', 'pace', 'checker', 'guide', 'oven', 'stain', 'dose', 'ready', 'judge', 'fortune', 'thought', 'reset', 'leak', 'wake-up', 'pass-expiry', 'subs-quit', 'my-bad', 'fridge-combo']
     };
@@ -267,10 +266,10 @@
         document.querySelectorAll('.tool-link').forEach(tool => {
             const url = tool.href.toLowerCase();
             const name = tool.getAttribute('data-name').toLowerCase();
-            let category = 'Life'; // Default
+            let category = 'Life'; // デフォルト
 
             for (const [cat, keywords] of Object.entries(categoryMap)) {
-                // URLまたはデータ名にキーワードが含まれているかチェック
+                // URLまたはツール名にキーワードが含まれているか精査
                 if (keywords.some(kw => url.includes(kw) || name.includes(kw))) { 
                     category = cat; 
                     break; 
@@ -309,7 +308,7 @@
         const selectionArea = document.getElementById('selectionArea');
         let hasVisible = false;
 
-        // クエリもカテゴリ選択もない場合のみ SelectionArea を表示
+        // 検索中またはカテゴリ選択中は SelectionArea を非表示
         selectionArea.style.display = (query || currentCategory !== 'All') ? 'none' : 'block';
 
         tools.forEach(tool => {
