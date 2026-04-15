@@ -60,14 +60,15 @@
         .cat-btn { white-space: nowrap; padding: 8px 16px; border-radius: var(--radius); background: var(--accent); color: #666; font-size: 0.75rem; font-weight: 800; border: none; cursor: pointer; }
         .cat-btn.active { background: var(--main); color: #fff; }
 
-        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        /* Grid System Corrected */
+        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; width: 100%; box-sizing: border-box; }
         @media (min-width: 500px) { .grid { grid-template-columns: repeat(5, 1fr); } }
 
-        .tool-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; transition: transform 0.2s; }
+        .tool-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; transition: transform 0.2s; width: 100%; }
         .tool-link:active { transform: scale(0.92); opacity: 0.8; }
         .icon-box { width: 100%; aspect-ratio: 1/1; background: #fff; border: 1px solid #eee; border-radius: var(--radius); overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .icon-box img { width: 100%; height: 100%; object-fit: cover; }
-        .tool-name { margin-top: 6px; font-size: 0.65rem; font-weight: 700; color: var(--main); text-align: center; line-height: 1.1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .tool-name { margin-top: 6px; font-size: 0.65rem; font-weight: 700; color: var(--main); text-align: center; line-height: 1.1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; width: 100%; }
 
         #no-results { display: none; text-align: center; padding: 40px 0; color: #ccc; font-weight: 700; }
 
@@ -213,7 +214,7 @@
         <a href="https://afrorakda.github.io/dirty-json-scrubber/" class="tool-link" data-name="Dirty JSON Scrubber"><div class="icon-box"><img src="image_85.png"></div><span class="tool-name">Dirty JSON Scrubber</span></a>
         <a href="https://afrorakda.github.io/web-safe-name-generator/" class="tool-link" data-name="Web Safe Name Generator"><div class="icon-box"><img src="image_86.png"></div><span class="tool-name">Web Safe Name Generator</span></a>
         <a href="https://afrorakda.github.io/ui-color-scaler/" class="tool-link" data-name="UI Color Scaler"><div class="icon-box"><img src="image_87.png"></div><span class="tool-name">UI Color Scaler</span></a>
-        <a href="https://afrorakda.github.io/text-on-color/" class="tool-link" data-name="Text on Color"><div class="box-box"><img src="image_88.png"></div><span class="tool-name">Text on Color</span></a>
+        <a href="https://afrorakda.github.io/text-on-color/" class="tool-link" data-name="Text on Color"><div class="icon-box"><img src="image_88.png"></div><span class="tool-name">Text on Color</span></a>
         <a href="https://afrorakda.github.io/gap-viewer/" class="tool-link" data-name="Gap Viewer"><div class="icon-box"><img src="image_89.png"></div><span class="tool-name">Gap Viewer</span></a>
         <a href="https://afrorakda.github.io/paper-to-pixel/" class="tool-link" data-name="Paper to Pixel"><div class="icon-box"><img src="image_90.png"></div><span class="tool-name">Paper to Pixel</span></a>
         <a href="https://afrorakda.github.io/speak-time-snap/" class="tool-link" data-name="Speak Time Snap"><div class="icon-box"><img src="image_91.png"></div><span class="tool-name">Speak Time Snap</span></a>
@@ -248,8 +249,7 @@
         <a href="https://afrorakda.github.io/cross-ratio/" class="tool-link" data-name="Cross Ratio"><div class="icon-box"><img src="image_120.png"></div><span class="tool-name">Cross Ratio</span></a>
     </div>
 
-    <footer id="dynamic-footer">
-        </footer>
+    <footer id="dynamic-footer"></footer>
 </div>
 
 <script>
@@ -259,7 +259,7 @@
         'Calc': ['cost', 'price', 'budget', 'spending', 'limit', 'splitter', 'duo', 'multiplier', 'hour', 'rem-to-pixel', 'timestamp', 'metric', 'percentage', 'counter', 'offset', 'sec-to-clock', 'ratio', 'mix-ratio', 'cross-ratio'],
         'Dev': ['json', 'csv', 'code', 'scrubber', 'status', 'cron', 'slug', 'generator', 'contrast', 'sync', 'scaler', 'link', 'url', 'bitrate', 'warrant', 'pure', 'http', 'hash', 'headers'],
         'Design': ['image', 'resizer', 'color', 'snap', 'eye', 'icon', 'mask', 'font', 'ratio', 'privacy', 'gap', 'viewer', 'filter', 'blind', 'palette', 'mood'],
-        'Life': ['tabata', 'breath', 'anchor', 'unclench', 'reader', 'stone', 'mirror', 'roulette', 'pace', 'checker', 'guide', 'oven', 'stain', 'dose', 'ready', 'judge', 'fortune', 'thought', 'reset', 'leak', 'wake-up', 'pass-expiry', 'subs-quit', 'my-bad']
+        'Life': ['tabata', 'breath', 'anchor', 'unclench', 'reader', 'stone', 'mirror', 'roulette', 'pace', 'checker', 'guide', 'oven', 'stain', 'dose', 'ready', 'judge', 'fortune', 'thought', 'reset', 'leak', 'wake-up', 'pass-expiry', 'subs-quit', 'my-bad', 'fridge-combo']
     };
 
     function initCategories() {
@@ -292,9 +292,6 @@
             btn.classList.toggle('active', btn.textContent === category);
         });
         updateView();
-        if (category !== 'All') {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
     }
 
     function updateView() {
@@ -305,7 +302,6 @@
         const selectionArea = document.getElementById('selectionArea');
         let hasVisible = false;
 
-        // クエリもカテゴリ選択もない場合のみ SelectionArea を表示
         selectionArea.style.display = (query || currentCategory !== 'All') ? 'none' : 'block';
 
         tools.forEach(tool => {
@@ -369,7 +365,7 @@
 
     initCategories();
     loadFooter();
-    updateView(); // 初期化時に表示を更新
+    updateView();
 </script>
 
 </body>
