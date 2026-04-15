@@ -21,23 +21,11 @@
 
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background-color: var(--bg); 
-            margin: 0; 
-            color: var(--main); 
-            -webkit-font-smoothing: antialiased; 
-            display: flex; 
-            justify-content: center; 
+            background-color: var(--bg); margin: 0; color: var(--main); 
+            -webkit-font-smoothing: antialiased; display: flex; justify-content: center; 
         }
         
-        .container { 
-            width: 100%; 
-            max-width: 600px; 
-            padding: 30px 15px; 
-            box-sizing: border-box; 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
-        }
+        .container { width: 100%; max-width: 600px; padding: 30px 15px; box-sizing: border-box; display: flex; flex-direction: column; min-height: 100vh; }
         
         header { text-align: left; margin-bottom: 25px; padding-left: 5px; }
         .title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
@@ -45,31 +33,22 @@
         .progress-badge { background: var(--main); color: #fff; padding: 2px 10px; border-radius: var(--radius); font-size: 0.7rem; font-weight: 800; }
         .subtitle { font-size: 0.85rem; color: #666; font-weight: 500; }
 
+        /* Search Section */
         .search-wrapper { margin-bottom: 25px; padding: 0 5px; position: relative; }
         .search-input {
             width: 100%; padding: 15px 45px 15px 20px; border: 2px solid var(--accent);
             border-radius: var(--radius); background: var(--input-bg);
             font-size: 1rem; font-weight: 600; color: var(--main);
             box-sizing: border-box; outline: none; 
-            -webkit-appearance: none;
-            -webkit-text-fill-color: var(--main);
-            opacity: 1 !important;
+            -webkit-appearance: none; -webkit-text-fill-color: var(--main); opacity: 1 !important;
         }
         .search-input::placeholder { color: #bbb; -webkit-text-fill-color: #bbb; opacity: 1; }
+        .clr-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 20px; color: #ccc; cursor: pointer; padding: 5px; display: none; }
 
-        .clr-btn { 
-            position: absolute; right: 15px; top: 50%; transform: translateY(-50%); 
-            background: none; border: none; font-size: 20px; color: #ccc; 
-            cursor: pointer; padding: 5px; display: none; 
-        }
-
+        /* Selection & Grid Settings (120 tools) */
         .selection-title { font-size: 0.75rem; font-weight: 800; color: #999; margin: 0 0 10px 5px; text-transform: uppercase; letter-spacing: 1px; }
         .selection-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 30px; padding: 0 5px; }
-        .select-card { 
-            text-decoration: none; background: var(--input-bg); border: 2px solid var(--accent); 
-            border-radius: var(--radius); padding: 15px 20px; display: flex; align-items: center; justify-content: space-between;
-            transition: 0.2s;
-        }
+        .select-card { text-decoration: none; background: var(--input-bg); border: 2px solid var(--accent); border-radius: var(--radius); padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; transition: 0.2s; }
         .select-card:active { transform: scale(0.98); background: var(--accent); }
         .card-info { display: flex; align-items: center; gap: 15px; }
         .card-icon { font-size: 1.5rem; }
@@ -94,32 +73,28 @@
 
         #no-results { display: none; text-align: center; padding: 40px 0; color: #ccc; font-weight: 700; }
 
-        /* Footer System: Sort Pureレイアウト踏襲 */
-        footer { margin-top: auto; padding: 30px 0 20px; text-align: center; border-top: 1px solid #f5f5f5; }
+        /* Dynamic Footer System */
+        footer { 
+            margin-top: auto; 
+            padding: 30px 0 20px; 
+            text-align: center; 
+            border-top: 1px solid #f5f5f5;
+            /* 指示通り: 文字を大きく、濃く */
+            font-size: 12px; 
+            color: #666; 
+            font-weight: 600;
+        }
         
         .footer-btns { display: flex; gap: 10px; margin-bottom: 20px; padding: 0 5px; }
-        .kofi-btn {
-            flex: 6; background: var(--main); color: #fff; padding: 12px; border-radius: var(--radius);
-            text-decoration: none; font-weight: bold; font-size: 13px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .home-btn {
-            flex: 4; background: var(--accent); color: var(--main); border: none; padding: 12px;
-            border-radius: var(--radius); font-weight: 800; font-size: 12px; cursor: pointer;
-        }
+        .kofi-btn { flex: 6; background: var(--main); color: #fff; padding: 12px; border-radius: var(--radius); text-decoration: none; font-weight: bold; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+        .home-btn { flex: 4; background: var(--accent); color: var(--main); border: none; padding: 12px; border-radius: var(--radius); font-weight: 800; font-size: 12px; cursor: pointer; }
         
-        .footer-info { font-size: 10px; color: #aaa; line-height: 1.6; font-weight: 500; }
+        .footer-info { line-height: 1.6; }
         .footer-info a { color: inherit; text-decoration: underline; }
 
         /* Modal */
-        #modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 100;
-        }
-        .modal-content {
-            background: #fff; width: 85%; max-width: 340px; padding: 30px;
-            border-radius: var(--radius); text-align: left; position: relative;
-        }
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 100; }
+        .modal-content { background: #fff; width: 85%; max-width: 340px; padding: 30px; border-radius: var(--radius); text-align: left; position: relative; }
         .close-x { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #888; cursor: pointer; }
     </style>
 </head>
@@ -288,17 +263,8 @@
         <a href="https://afrorakda.github.io/cross-ratio/" class="tool-link" data-name="Cross Ratio"><div class="icon-box"><img src="image_120.png"></div><span class="tool-name">Cross Ratio</span></a>
     </div>
 
-    <footer>
-        <div class="footer-btns">
-            <a href="https://ko-fi.com/afrorakda" target="_blank" class="kofi-btn">☕️buy me a coffee</a>
-            <button class="home-btn" onclick="showModal()">Add Home</button>
-        </div>
-
-        <div class="footer-info">
-            No login / No tracking / No ads / Browser only<br>
-            <a href="https://afrorakda.com/privacy/">Privacy Policy</a> / afrorakda © 2026
-        </div>
-    </footer>
+    <footer id="dynamic-footer">
+        </footer>
 </div>
 
 <div id="modal" onclick="hideModal()">
@@ -390,7 +356,28 @@
     function showModal() { document.getElementById('modal').style.display = 'flex'; }
     function hideModal() { document.getElementById('modal').style.display = 'none'; }
 
+    // Dynamic Footer Loader
+    async function loadFooter() {
+        try {
+            const response = await fetch('footer.json');
+            const data = await response.json();
+            document.getElementById('dynamic-footer').innerHTML = `
+                <div class="footer-btns">
+                    <a href="${data.kofi.url}" target="_blank" class="kofi-btn">${data.kofi.text}</a>
+                    <button class="home-btn" onclick="showModal()">${data.install.text}</button>
+                </div>
+                <div class="footer-info">
+                    ${data.copy}<br>
+                    <a href="${data.privacy.url}">${data.privacy.text}</a> / ${data.author}
+                </div>
+            `;
+        } catch (err) {
+            console.error("Footer load failed", err);
+        }
+    }
+
     initCategories();
+    loadFooter();
 </script>
 
 </body>
