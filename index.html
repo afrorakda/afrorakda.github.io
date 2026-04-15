@@ -71,7 +71,6 @@
 
         #no-results { display: none; text-align: center; padding: 40px 0; color: #ccc; font-weight: 700; }
 
-        /* Dynamic Footer System */
         footer { margin-top: auto; padding: 30px 0 20px; text-align: center; border-top: 1px solid #f5f5f5; font-size: 12px; color: #666; font-weight: 600; }
         .footer-btns { display: flex; gap: 10px; margin-bottom: 20px; padding: 0 5px; }
         .kofi-btn { flex: 6; background: var(--main); color: #fff; padding: 12px; border-radius: var(--radius); text-decoration: none; font-weight: bold; font-size: 13px; display: flex; align-items: center; justify-content: center; }
@@ -79,7 +78,6 @@
         .footer-info { line-height: 1.6; }
         .footer-info a { color: inherit; text-decoration: underline; }
 
-        /* Modal (Structure will be dynamic, but styles stay here) */
         #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 100; }
         .modal-content { background: #fff; width: 85%; max-width: 340px; padding: 30px; border-radius: var(--radius); text-align: left; position: relative; }
         .close-x { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #888; cursor: pointer; }
@@ -215,7 +213,7 @@
         <a href="https://afrorakda.github.io/dirty-json-scrubber/" class="tool-link" data-name="Dirty JSON Scrubber"><div class="icon-box"><img src="image_85.png"></div><span class="tool-name">Dirty JSON Scrubber</span></a>
         <a href="https://afrorakda.github.io/web-safe-name-generator/" class="tool-link" data-name="Web Safe Name Generator"><div class="icon-box"><img src="image_86.png"></div><span class="tool-name">Web Safe Name Generator</span></a>
         <a href="https://afrorakda.github.io/ui-color-scaler/" class="tool-link" data-name="UI Color Scaler"><div class="icon-box"><img src="image_87.png"></div><span class="tool-name">UI Color Scaler</span></a>
-        <a href="https://afrorakda.github.io/text-on-color/" class="tool-link" data-name="Text on Color"><div class="icon-box"><img src="image_88.png"></div><span class="tool-name">Text on Color</span></a>
+        <a href="https://afrorakda.github.io/text-on-color/" class="tool-link" data-name="Text on Color"><div class="box-box"><img src="image_88.png"></div><span class="tool-name">Text on Color</span></a>
         <a href="https://afrorakda.github.io/gap-viewer/" class="tool-link" data-name="Gap Viewer"><div class="icon-box"><img src="image_89.png"></div><span class="tool-name">Gap Viewer</span></a>
         <a href="https://afrorakda.github.io/paper-to-pixel/" class="tool-link" data-name="Paper to Pixel"><div class="icon-box"><img src="image_90.png"></div><span class="tool-name">Paper to Pixel</span></a>
         <a href="https://afrorakda.github.io/speak-time-snap/" class="tool-link" data-name="Speak Time Snap"><div class="icon-box"><img src="image_91.png"></div><span class="tool-name">Speak Time Snap</span></a>
@@ -277,7 +275,6 @@
 
     function handleInput(el) {
         document.getElementById('clearBtn').style.display = el.value ? 'block' : 'none';
-        toggleSelection();
         updateView();
     }
 
@@ -285,7 +282,6 @@
         const input = document.getElementById('searchInput');
         input.value = '';
         document.getElementById('clearBtn').style.display = 'none';
-        toggleSelection();
         input.focus();
         updateView();
     }
@@ -295,16 +291,10 @@
         document.querySelectorAll('.cat-btn').forEach(btn => {
             btn.classList.toggle('active', btn.textContent === category);
         });
-        toggleSelection();
         updateView();
         if (category !== 'All') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    }
-
-    function toggleSelection() {
-        const query = document.getElementById('searchInput').value;
-        document.getElementById('selectionArea').style.display = (query || currentCategory !== 'All') ? 'none' : 'block';
     }
 
     function updateView() {
@@ -312,13 +302,18 @@
         const tools = document.querySelectorAll('.tool-link');
         const grid = document.getElementById('toolGrid');
         const noResults = document.getElementById('no-results');
+        const selectionArea = document.getElementById('selectionArea');
         let hasVisible = false;
+
+        // クエリもカテゴリ選択もない場合のみ SelectionArea を表示
+        selectionArea.style.display = (query || currentCategory !== 'All') ? 'none' : 'block';
 
         tools.forEach(tool => {
             const name = tool.getAttribute('data-name').toLowerCase();
             const category = tool.getAttribute('data-category');
             const matchesQuery = name.includes(query);
             const matchesCategory = (currentCategory === 'All' || category === currentCategory);
+
             if (matchesQuery && matchesCategory) {
                 tool.style.display = 'flex';
                 hasVisible = true;
@@ -326,11 +321,11 @@
                 tool.style.display = 'none';
             }
         });
+
         grid.style.display = hasVisible ? 'grid' : 'none';
         noResults.style.display = hasVisible ? 'none' : 'block';
     }
 
-    // Modal Control Functions (Globally accessible)
     function showModal() { 
         const modal = document.getElementById('modal');
         if(modal) modal.style.display = 'flex'; 
@@ -340,13 +335,10 @@
         if(modal) modal.style.display = 'none'; 
     }
 
-    // Dynamic Footer Loader
     async function loadFooter() {
         try {
             const response = await fetch('footer.json');
             const data = await response.json();
-
-            // Inject Footer HTML
             document.getElementById('dynamic-footer').innerHTML = `
                 <div class="footer-btns">
                     <a href="${data.kofi.url}" target="_blank" class="kofi-btn">${data.kofi.text}</a>
@@ -357,8 +349,6 @@
                     <a href="${data.privacy.url}">${data.privacy.text}</a> / ${data.author}
                 </div>
             `;
-
-            // Inject Modal HTML into body
             const modalDiv = document.createElement('div');
             modalDiv.id = 'modal';
             modalDiv.onclick = hideModal;
@@ -372,7 +362,6 @@
                 </div>
             `;
             document.body.appendChild(modalDiv);
-
         } catch (err) {
             console.error("Footer load failed", err);
         }
@@ -380,6 +369,7 @@
 
     initCategories();
     loadFooter();
+    updateView(); // 初期化時に表示を更新
 </script>
 
 </body>
