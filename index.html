@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>afrorakda Hub | 120+ Minimalist Tools</title>
@@ -44,9 +44,11 @@
         .search-input {
             width: 100%; padding: 15px 45px 15px 20px; border: 2px solid var(--accent);
             border-radius: var(--radius); background: var(--input-bg);
-            font-size: 1rem; font-weight: 600; color: var(--main);
+            font-size: 16px; font-weight: 600; color: var(--main);
             box-sizing: border-box; outline: none; 
-            -webkit-appearance: none; -webkit-text-fill-color: var(--main); opacity: 1 !important;
+            -webkit-appearance: none; 
+            -webkit-text-fill-color: var(--main); /* 憲法遵守：iOS文字薄化防止 */
+            opacity: 1 !important;
         }
         .search-input::placeholder { color: #bbb; -webkit-text-fill-color: #bbb; opacity: 1; }
         .clr-btn { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 20px; color: #ccc; cursor: pointer; padding: 5px; display: none; }
@@ -96,7 +98,7 @@
     <header>
         <div class="title-row">
             <h1>afrorakda Hub</h1>
-            <span class="progress-badge">120 / 100 Completed</span>
+            <span class="progress-badge">126 / 100 Completed</span>
         </div>
         <p class="subtitle">120+ Minimalist tools. No login. No ads.</p>
     </header>
@@ -110,7 +112,7 @@
         <p class="selection-title">Targeted Selection</p>
         <div class="selection-grid">
             <div class="select-card" onclick="jumpToCategory('Text')">
-                <div class="card-info"><span class="card-icon">✍️</span><div class="card-text"><span class="card-label">For SNS Marketers</span><span class="card-sub">Cleaner, Word count, Line break...</span></div></div><span class="arrow">→</span>
+                <div class="card-info"><span class="card-icon">✍️</span><div class="card-text"><span class="card-label">For SNS Marketers</span><span class="card-sub">Cleaner, Word count, Hash Mixer...</span></div></div><span class="arrow">→</span>
             </div>
             <div class="select-card" onclick="jumpToCategory('Life')">
                 <div class="card-info"><span class="card-icon">🏠</span><div class="card-text"><span class="card-label">For Daily Life</span><span class="card-sub">Unit price, Percentage, Roulette...</span></div></div><span class="arrow">→</span>
@@ -153,8 +155,8 @@
         <a href="https://afrorakda.github.io/slug-maker/" class="tool-link" data-name="Slug Maker" data-category="Dev"><div class="icon-box"><img src="image_18.png" loading="lazy"></div><span class="tool-name">Slug Maker</span></a>
         <a href="https://afrorakda.github.io/insta-liner/" class="tool-link" data-name="Insta Liner" data-category="Text"><div class="icon-box"><img src="image_19.png" loading="lazy"></div><span class="tool-name">Insta Liner</span></a>
         <a href="https://afrorakda.github.io/line-decorator/" class="tool-link" data-name="Line Decorator" data-category="Text"><div class="icon-box"><img src="image_20.png" loading="lazy"></div><span class="tool-name">Line Decorator</span></a>
-        <a href="afrorakda.github.io/hash-mixer/" class="tool-link" data-name="Hash Mixer" data-category="Life"><div class="icon-box"><img src="image_21.png" loading="lazy"></div><span class="tool-name"> Hash Mixer </span></a>
-        <a href="https://afrorakda.github.io/color-snap/" class="tool-link" data-name="Color Snap" data-categorgdiv class="icon-box"><img src="image_22.png" loading="lazy"></div><span class="tool-name">Color Snap</span></a>
+        <a href="https://afrorakda.github.io/hash-mixer/" class="tool-link" data-name="Hash Mixer" data-category="Text"><div class="icon-box"><img src="image_21.png" loading="lazy"></div><span class="tool-name">Hash Mixer</span></a>
+        <a href="https://afrorakda.github.io/color-snap/" class="tool-link" data-name="Color Snap" data-category="Design"><div class="icon-box"><img src="image_22.png" loading="lazy"></div><span class="tool-name">Color Snap</span></a>
         <a href="https://afrorakda.github.io/font-picker/" class="tool-link" data-name="Font Picker" data-category="Design"><div class="icon-box"><img src="image_23.png" loading="lazy"></div><span class="tool-name">Font Picker</span></a>
         <a href="https://afrorakda.github.io/currency-duo/" class="tool-link" data-name="Currency Duo" data-category="Calc"><div class="icon-box"><img src="image_24.png" loading="lazy"></div><span class="tool-name">Currency Duo</span></a>
         <a href="https://afrorakda.github.io/title-namer/" class="tool-link" data-name="Title Namer" data-category="Text"><div class="icon-box"><img src="image_25.png" loading="lazy"></div><span class="tool-name">Title Namer</span></a>
@@ -310,7 +312,6 @@
         updateView();
     }
 
-    // Targeted Selection用：カテゴリ切替＋スクロール連動
     function jumpToCategory(category) {
         setCategory(category);
         const wrapper = document.getElementById('categoryWrapper');
